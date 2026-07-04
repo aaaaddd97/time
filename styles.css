@@ -1,16 +1,13 @@
 /* styles.css
    公司網站範例樣式（蒸氣龐克主題版本）
    - 已保留原先的版面與結構（header、hero、section、cards、form）
-   - 這個檔案以蒸氣龐克（Steampunk）配色與裝飾為基礎：黃銅色、皮革、羊皮紙、金屬飾釘
-   - 註：若想快速切回原始現代風格，可把 body.steampunk 的 class 移除或修改變數
+   - 新增：羊皮紙紋理背景（使用內嵌 SVG pattern）並修正聯絡區塊背景覆蓋問題
 
    可修改區域說明：
    - :root 變數：主要色票（--brass、--leather、--parchment 等）
-   - .brand 與 h1、按鈕樣式可換字型，範例載入了 Google Fonts（Cinzel）供標題使用
+   - 若要更換紋理可把 --parchment-pattern 的 data URL 換成其他圖檔或 data URL
 */
 
-/* 建議字型（標題風格） - 使用 Google Fonts Cinzel（裝飾性）
-   若在內網或無網路環境請移除 @import 並改用本機字型 */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 :root{
@@ -25,6 +22,10 @@
   --metal-edge: rgba(255,255,255,0.06);
   --max-width:1100px;
   --radius:8px;
+
+  /* 內嵌羊皮紙紋理（可替換為檔案或其他 data URL）
+     小提醒：data URL 已經 URL-encoded 的 #hex 與空白 --> %23 / %20 等 */
+  --parchment-pattern: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23efe6d6'/%3E%3Cg opacity='0.06' fill='%235a4b39'%3E%3Ccircle cx='18' cy='32' r='1'/%3E%3Ccircle cx='46' cy='78' r='1'/%3E%3Ccircle cx='83' cy='14' r='1'/%3E%3Ccircle cx='120' cy='54' r='1'/%3E%3Ccircle cx='160' cy='96' r='1'/%3E%3Ccircle cx='30' cy='140' r='1'/%3E%3Ccircle cx='76' cy='110' r='1'/%3E%3Ccircle cx='140' cy='152' r='1'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* 基本重置與版面：保留原本結構用法 */
@@ -34,12 +35,14 @@ body{
   margin:0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Helvetica Neue", Arial;
   color:var(--text-dark);
-  background: radial-gradient(circle at 10% 10%, rgba(0,0,0,0.03) 0%, transparent 20%),
-              linear-gradient(180deg, #f5efe2 0%, #efe6d6 100%);
+  /* 把羊皮紙紋理放在最上層，並重複平鋪，接著是紙張漸層與微小暗角 */
+  background-image: var(--parchment-pattern),
+                    radial-gradient(circle at 10% 10%, rgba(0,0,0,0.03) 0%, transparent 20%),
+                    linear-gradient(180deg, #f5efe2 0%, #efe6d6 100%);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-size: auto, cover, cover;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  /* 輕微紙張質感 */
-  background-repeat: no-repeat;
 }
 
 /* 常用容器 */
@@ -88,7 +91,6 @@ body{
 }
 .main-nav a:hover{ background: rgba(255,255,255,0.03); color:var(--brass) }
 
-/* rivets（飾釘）在導覽右側顯示作為裝飾：使用 pseudo element */
 .header-inner::after{
   content:'';
   width:6px;
@@ -196,6 +198,19 @@ body{
 .faq-answer{ padding:0 1rem 1rem 1rem; display:none; color:var(--muted) }
 
 /* 聯絡表單 */
+/* 將整個 contact 區塊改為羊皮紙卡片，避免出現未覆蓋的白色區塊 */
+#contact{
+  background-image: var(--parchment-pattern);
+  background-repeat: repeat;
+}
+#contact .container{
+  background: linear-gradient(180deg, var(--paper-accent), var(--parchment));
+  border: 1px solid rgba(0,0,0,0.06);
+  padding:1.5rem;
+  border-radius:10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.28);
+}
+
 .contact-form{
   display:grid;
   gap:0.75rem;
@@ -211,6 +226,9 @@ body{
   font-size:0.95rem;
 }
 .contact-form .hint{ color:var(--muted); font-size:0.9rem }
+
+/* 公司資訊也放同一張卡片內，確保背景一致 */
+.company-info{ margin-top:1rem; }
 
 /* Footer */
 .site-footer{
@@ -256,4 +274,4 @@ body{
   filter: drop-shadow(0 2px 2px rgba(0,0,0,0.08));
 }
 
-/* 註：本 CSS 以純 CSS 製作蒸氣龐克感，若要更豐富的齒輪動畫或貼圖建議加入 SVG/PNG 素材或 webfont。*/
+/* 註：本 CSS 使用內嵌 SVG data URL 產生紙張紋理，若需更高解析度或真實貼圖可上傳圖片檔並改為 url('/path/to/parchment.png'). */
