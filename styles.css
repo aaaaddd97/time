@@ -1,0 +1,52 @@
+/* 最小樣式：只做基礎版面與隱藏行為，方便你後續加美編 */
+:root{
+  --gap: 16px;
+  --max-width: 900px;
+  --brand-color: #222;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  padding:var(--gap);
+  color:var(--brand-color);
+  display:flex;
+  justify-content:center;
+}
+.site-header{
+  width:100%;
+  max-width:var(--max-width);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--gap);
+  margin-bottom:var(--gap);
+}
+.brand{margin:0;font-size:1.25rem}
+.main-nav{display:flex;gap:8px}
+.nav-btn{
+  padding:8px 12px;
+  border:1px solid #ccc;
+  background:#fff;
+  cursor:pointer;
+  border-radius:4px;
+}
+.nav-btn[aria-pressed="true"]{
+  background:#f0f0f0;
+  border-color:#999;
+  font-weight:600;
+}
+.content{
+  width:100%;
+  max-width:var(--max-width);
+}
+.panel{padding:12px;border:1px solid #eee;border-radius:6px;background:#fff}
+.panel + .panel{margin-top:var(--gap)}
+.hidden{display:none}
+
+/* focus 樣式便於鍵盤使用者 */
+.nav-btn:focus, .panel:focus{
+  outline:3px solid rgba(0,120,215,0.15);
+  outline-offset:2px;
+}

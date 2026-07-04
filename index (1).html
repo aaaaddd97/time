@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>公司網站 - 範例</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="brand">公司名稱</h1>
+    <nav class="main-nav" aria-label="主要導覽">
+      <button class="nav-btn" data-target="about" aria-controls="about" aria-pressed="true">關於我們</button>
+      <button class="nav-btn" data-target="departments" aria-controls="departments" aria-pressed="false">部門介紹</button>
+    </nav>
+  </header>
+
+  <main id="content" class="content" tabindex="-1">
+    <section id="about" class="panel" role="region" aria-labelledby="about-title" tabindex="0">
+      <h2 id="about-title">關於我們</h2>
+      <div class="panel-body">
+        <p>（在此加入關於我們的內文）</p>
+      </div>
+    </section>
+
+    <section id="departments" class="panel hidden" role="region" aria-labelledby="dept-title" tabindex="0">
+      <h2 id="dept-title">部門介紹</h2>
+      <div class="panel-body">
+        <ul id="dept-list">
+          <li>（在此加入各部門說明或列表）</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
