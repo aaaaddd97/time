@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Small gear -->
+  <g fill="#d0a96a" stroke="#8b6638" stroke-width="1.5">
+    <circle cx="30" cy="30" r="12" fill="#e6c58a" />
+    <g>
+      <rect x="28" y="2" width="4" height="8" rx="1" transform="rotate(0 30 30)" />
+      <rect x="28" y="50" width="4" height="8" rx="1" transform="rotate(180 30 30)" />
+      <rect x="2" y="28" width="8" height="4" rx="1" transform="rotate(270 30 30)" />
+      <rect x="50" y="28" width="8" height="4" rx="1" transform="rotate(90 30 30)" />
+    </g>
+    <circle cx="30" cy="30" r="5" fill="#8b6638" />
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Simple stylized gear (large) -->
+  <g fill="#cfa86b" stroke="#8b6638" stroke-width="2">
+    <circle cx="50" cy="50" r="24" fill="#d8b87a" />
+    <!-- teeth: 8 teeth -->
+    <g>
+      <rect x="47" y="2" width="6" height="14" rx="1" transform="rotate(0 50 50)" />
+      <rect x="47" y="84" width="6" height="14" rx="1" transform="rotate(180 50 50)" />
+      <rect x="2" y="47" width="14" height="6" rx="1" transform="rotate(270 50 50)" />
+      <rect x="84" y="47" width="14" height="6" rx="1" transform="rotate(90 50 50)" />
+      <rect x="70" y="8" width="6" height="14" rx="1" transform="rotate(45 50 50)" />
+      <rect x="70" y="78" width="6" height="14" rx="1" transform="rotate(135 50 50)" />
+      <rect x="24" y="78" width="6" height="14" rx="1" transform="rotate(225 50 50)" />
+      <rect x="24" y="8" width="6" height="14" rx="1" transform="rotate(315 50 50)" />
+    </g>
+    <circle cx="50" cy="50" r="10" fill="#8b6638" />
+  </g>
+</svg>

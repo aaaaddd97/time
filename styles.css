@@ -133,6 +133,19 @@ body{
 }
 .lead{ color:var(--muted); margin:0 0 1rem 0; }
 
+/* stitching decoration for hero card */
+.container.stitch{ position:relative }
+.container.stitch::before{
+  content:'';
+  position:absolute;
+  left:12px; right:12px; top:12px; bottom:12px;
+  border-radius:8px;
+  pointer-events:none;
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.04) 0 2px, transparent 2px 12px);
+  mask-image: linear-gradient(#000, #000); /* ensure it shows as subtle stitching */
+  opacity:0.45;
+}
+
 /* 按鈕樣式：仿金屬銘牌 */
 .btn{
   display:inline-block;
@@ -248,16 +261,7 @@ body{
   font-weight:700;
 }
 
-/* 響應式 */
-@media (max-width:900px){
-  .main-nav{ display:none; }
-  .nav-toggle{ display:block; }
-  .header-inner{ gap:0.5rem; }
-  .hero h1{ font-size:1.5rem }
-}
-
-/* 可選：為卡片加入輕微齒輪裝飾（使用 pseudo-element）
-   使用方法：在任一 .news-item 或 .job-card 上加入類別 .gears 即可 */
+/* gears decoration: use uploaded SVGs and add subtle rotation animation */
 .gears{ position:relative }
 .gears::before{
   content:'';
@@ -266,12 +270,38 @@ body{
   top:10px;
   width:60px;
   height:60px;
-  background: radial-gradient(circle at 30% 30%, rgba(0,0,0,0.06), transparent 30%),
-              linear-gradient(180deg, rgba(200,160,110,0.18), rgba(120,80,40,0.06));
-  border-radius:50%;
-  transform:rotate(12deg);
-  opacity:0.9;
+  background-image: url('assets/gear-large.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+  opacity:0.95;
+  animation: gear-rotate 12s linear infinite;
   filter: drop-shadow(0 2px 2px rgba(0,0,0,0.08));
+}
+.gears::after{
+  content:'';
+  position:absolute;
+  right:80px;
+  top:40px;
+  width:36px;
+  height:36px;
+  background-image: url('assets/gear-small.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+  opacity:0.95;
+  animation: gear-rotate-reverse 8s linear infinite;
+}
+@keyframes gear-rotate{ from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
+@keyframes gear-rotate-reverse{ from{ transform: rotate(360deg) } to{ transform: rotate(0deg) } }
+
+/* 響應式 */
+@media (max-width:900px){
+  .main-nav{ display:none; }
+  .nav-toggle{ display:block; }
+  .header-inner{ gap:0.5rem; }
+  .hero h1{ font-size:1.5rem }
+  .gears::before, .gears::after{ display:none } /* hide decorations on small screens */
 }
 
 /* 註：本 CSS 使用內嵌 SVG data URL 產生紙張紋理，若需更高解析度或真實貼圖可上傳圖片檔並改為 url('/path/to/parchment.png'). */
