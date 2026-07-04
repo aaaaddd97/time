@@ -1,7 +1,9 @@
-/* 基本樣式：styles.css
-   註：此檔為範例樣式，包含排版、響應式、按鈕、表單、FAQ、組織架構樣式等。
-   可依公司 CI/顏色調整色票變數（--primary、--muted 等）。 */
-
+/* styles.css
+   公司網站範例樣式（可直接使用或修改）
+   - 包含：導覽、英雄區、區塊樣式、組織架構、公告、招募、FAQ、聯絡表單、響應式
+   - 請在 :root 區塊修改色票或字體以配合公司 CI
+   - 所有區塊都有註解，方便尋找要編輯的地方
+*/
 :root{
   --primary:#0b6efd; /* 主色，可替換 */
   --accent:#06b6d4;
@@ -159,6 +161,23 @@ body{
 
 /* Footer */
 .site-footer{ padding:1.25rem 0; color:var(--muted); text-align:center }
+
+/* 新增：分頁顯示控制與選單 active 樣式
+   說明：
+   - 預設不會隱藏任何 section（確保無 JS 時使用者可以看到全部內容）
+   - 當 JS 啟動後，會把不需要的 section 加上 .hidden 以隱藏它們
+*/
+.section.hidden {
+  display: none; /* 隱藏不顯示的分頁內容 */
+}
+
+/* 選單目前選中樣式 */
+.main-nav a.active {
+  background: rgba(11,110,253,0.12);
+  color: var(--primary); /* 確保有 --primary 變數，或改為實際色碼 */
+  border-radius:6px;
+  font-weight:700;
+}
 
 /* 響應式 */
 @media (max-width:900px){
