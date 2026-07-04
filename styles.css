@@ -1,29 +1,45 @@
 /* styles.css
-   公司網站範例樣式（可直接使用或修改）
-   - 包含：導覽、英雄區、區塊樣式、組織架構、公告、招募、FAQ、聯絡表單、響應式
-   - 請在 :root 區塊修改色票或字體以配合公司 CI
-   - 所有區塊都有註解，方便尋找要編輯的地方
+   公司網站範例樣式（蒸氣龐克主題版本）
+   - 已保留原先的版面與結構（header、hero、section、cards、form）
+   - 這個檔案以蒸氣龐克（Steampunk）配色與裝飾為基礎：黃銅色、皮革、羊皮紙、金屬飾釘
+   - 註：若想快速切回原始現代風格，可把 body.steampunk 的 class 移除或修改變數
+
+   可修改區域說明：
+   - :root 變數：主要色票（--brass、--leather、--parchment 等）
+   - .brand 與 h1、按鈕樣式可換字型，範例載入了 Google Fonts（Cinzel）供標題使用
 */
+
+/* 建議字型（標題風格） - 使用 Google Fonts Cinzel（裝飾性）
+   若在內網或無網路環境請移除 @import 並改用本機字型 */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
 :root{
-  --primary:#0b6efd; /* 主色，可替換 */
-  --accent:#06b6d4;
-  --bg:#f7f7fb;
-  --text:#222;
-  --muted:#6b7280;
+  /* 蒸氣龐克主題色票（可微調） */
+  --brass: #b08d57;       /* 黃銅 / 金屬主色 */
+  --brass-dark: #8f6f3f;  /* 黃銅暗 */
+  --leather: #2e1f18;     /* 深皮革色（header / footer 背景） */
+  --parchment: #efe6d6;   /* 羊皮紙、卡片背景 */
+  --paper-accent: #f6efe2;/* 亮羊皮紙 */
+  --text-dark: #22221c;   /* 文字 */
+  --muted: #6b5b4a;       /* 次要文字 */
+  --metal-edge: rgba(255,255,255,0.06);
   --max-width:1100px;
   --radius:8px;
 }
 
-/* Reset / 基本排版 */
+/* 基本重置與版面：保留原本結構用法 */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Helvetica Neue", Arial;
-  color:var(--text);
-  background:var(--bg);
+  color:var(--text-dark);
+  background: radial-gradient(circle at 10% 10%, rgba(0,0,0,0.03) 0%, transparent 20%),
+              linear-gradient(180deg, #f5efe2 0%, #efe6d6 100%);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  /* 輕微紙張質感 */
+  background-repeat: no-repeat;
 }
 
 /* 常用容器 */
@@ -33,13 +49,15 @@ body{
   padding:1.25rem;
 }
 
-/* Header / 導覽列 */
+/* Header / 導覽列：仿金屬邊與皮革背景 */
 .site-header{
-  background:#fff;
-  border-bottom:1px solid #e6e9ef;
+  background: linear-gradient(180deg, var(--leather) 0%, #3a2a22 100%);
+  color:var(--paper-accent);
+  border-bottom:4px solid rgba(0,0,0,0.25);
   position:sticky;
   top:0;
   z-index:50;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 .header-inner{
   display:flex;
@@ -49,20 +67,37 @@ body{
 }
 .brand{
   font-weight:700;
-  font-size:1.125rem;
-  color:var(--primary);
+  font-size:1.25rem;
+  color:var(--brass);
+  font-family: 'Cinzel', serif; /* 裝飾字型 */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 -1px 0 rgba(0,0,0,0.4);
+  letter-spacing:0.5px;
 }
 .main-nav{
   display:flex;
   gap:0.75rem;
 }
 .main-nav a{
-  color:var(--muted);
+  color:var(--paper-accent);
   text-decoration:none;
-  padding:0.5rem 0.6rem;
+  padding:0.45rem 0.7rem;
   border-radius:6px;
+  font-weight:600;
+  transition: all 180ms ease;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
 }
-.main-nav a:hover{ background:rgba(11,110,253,0.06); color:var(--primary) }
+.main-nav a:hover{ background: rgba(255,255,255,0.03); color:var(--brass) }
+
+/* rivets（飾釘）在導覽右側顯示作為裝飾：使用 pseudo element */
+.header-inner::after{
+  content:'';
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background: linear-gradient(180deg, #c89b55, #7b5a30);
+  box-shadow: 12px 0 0 #7b5a30, 24px 0 0 #c89b55;
+  opacity:0.85;
+}
 
 /* 導覽在小螢幕的切換按鈕 */
 .nav-toggle{
@@ -70,41 +105,56 @@ body{
   background:transparent;
   border:0;
   font-size:1.25rem;
+  color:var(--paper-accent);
 }
 
-/* 英雄區（首頁） */
+/* 英雄區（首頁）：仿金屬邊框與羊皮紙卡 */
 .hero{
   padding:3.25rem 0;
-  background:linear-gradient(180deg, rgba(11,110,253,0.06), transparent 60%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent 60%);
+}
+.hero .container{
+  background: linear-gradient(180deg, var(--paper-accent), var(--parchment));
+  border: 1px solid rgba(0,0,0,0.06);
+  padding:2rem;
+  border-radius:10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.3);
+  position:relative;
+  overflow:hidden;
 }
 .hero h1{
   margin:0 0 0.75rem 0;
   font-size:2rem;
+  font-family: 'Cinzel', serif;
+  color:var(--leather);
+  letter-spacing:0.5px;
 }
 .lead{ color:var(--muted); margin:0 0 1rem 0; }
 
-/* 按鈕樣式 */
+/* 按鈕樣式：仿金屬銘牌 */
 .btn{
   display:inline-block;
-  background:var(--primary);
-  color:#fff;
+  background: linear-gradient(180deg, var(--brass) 0%, var(--brass-dark) 100%);
+  color:#1b1207;
   padding:0.6rem 0.9rem;
   border-radius:6px;
   text-decoration:none;
-  font-weight:600;
+  font-weight:700;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.18);
+  border:1px solid rgba(0,0,0,0.15);
 }
 .btn.ghost{
   background:transparent;
-  color:var(--primary);
-  border:1px solid rgba(11,110,253,0.12);
+  color:var(--brass);
+  border:1px solid rgba(160,120,70,0.18);
+  box-shadow:none;
 }
 .btn.small{ padding:0.35rem 0.6rem; font-size:0.9rem; }
 
-/* 區塊統一風格 */
+/* 區塊統一風格：卡片改為羊皮紙與金屬邊 */
 .section{ padding:2rem 0; background:transparent; }
 .section + .section{ border-top:1px solid rgba(0,0,0,0.03) }
 
-/* 組織架構：簡單卡片列表 */
 .org-chart{
   list-style:none;
   padding:0;
@@ -114,32 +164,34 @@ body{
   flex-wrap:wrap;
 }
 .org-chart li{
-  background:#fff;
+  background: linear-gradient(180deg, var(--parchment), var(--paper-accent));
   padding:1rem;
   border-radius:8px;
-  box-shadow:0 1px 6px rgba(20,20,30,0.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
+  border-left:4px solid var(--brass);
   min-width:200px;
   flex:1 1 220px;
 }
 
 /* 最新公告 */
 .news-list{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-.news-item{ background:#fff; padding:1rem; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,0.04) }
+.news-item{ background: linear-gradient(180deg, var(--parchment), #f8f3e8); padding:1rem; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,0.06); border-left:4px solid #caa86b }
 .news-item time{ color:var(--muted); font-size:0.875rem; }
 
 /* 招募卡片 */
-.job-card{ background:#fff; padding:1rem; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,0.04) }
+.job-card{ background: linear-gradient(180deg, var(--parchment), #fbf6eb); padding:1rem; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); border-top:3px dashed rgba(0,0,0,0.06) }
 
 /* FAQ 手風琴 */
-.faq .faq-item{ margin-bottom:0.5rem; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,0.03) }
+.faq .faq-item{ margin-bottom:0.5rem; background: linear-gradient(180deg, #fbf6eb, var(--parchment)); border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.05) }
 .faq-question{
   width:100%;
   text-align:left;
   background:transparent;
   border:0;
   padding:0.9rem 1rem;
-  font-weight:600;
+  font-weight:700;
   cursor:pointer;
+  color:var(--leather);
 }
 .faq-answer{ padding:0 1rem 1rem 1rem; display:none; color:var(--muted) }
 
@@ -153,28 +205,27 @@ body{
 .contact-form input, .contact-form textarea{
   width:100%;
   padding:0.6rem 0.75rem;
-  border:1px solid #e6e9ef;
+  border:1px solid rgba(0,0,0,0.08);
   border-radius:6px;
-  background:#fff;
+  background: linear-gradient(180deg, #fffdf6, #fbf6eb);
   font-size:0.95rem;
 }
+.contact-form .hint{ color:var(--muted); font-size:0.9rem }
 
 /* Footer */
-.site-footer{ padding:1.25rem 0; color:var(--muted); text-align:center }
-
-/* 新增：分頁顯示控制與選單 active 樣式
-   說明：
-   - 預設不會隱藏任何 section（確保無 JS 時使用者可以看到全部內容）
-   - 當 JS 啟動後，會把不需要的 section 加上 .hidden 以隱藏它們
-*/
-.section.hidden {
-  display: none; /* 隱藏不顯示的分頁內容 */
+.site-footer{
+  padding:1.25rem 0;
+  color:var(--paper-accent);
+  background: linear-gradient(180deg, #3a2a22, var(--leather));
+  text-align:center;
+  border-top:4px solid rgba(0,0,0,0.25);
 }
 
-/* 選單目前選中樣式 */
+/* 分頁顯示控制與選單 active 樣式（保留） */
+.section.hidden { display: none; }
 .main-nav a.active {
-  background: rgba(11,110,253,0.12);
-  color: var(--primary); /* 確保有 --primary 變數，或改為實際色碼 */
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.02));
+  color: var(--brass);
   border-radius:6px;
   font-weight:700;
 }
@@ -186,3 +237,23 @@ body{
   .header-inner{ gap:0.5rem; }
   .hero h1{ font-size:1.5rem }
 }
+
+/* 可選：為卡片加入輕微齒輪裝飾（使用 pseudo-element）
+   使用方法：在任一 .news-item 或 .job-card 上加入類別 .gears 即可 */
+.gears{ position:relative }
+.gears::before{
+  content:'';
+  position:absolute;
+  right:12px;
+  top:10px;
+  width:60px;
+  height:60px;
+  background: radial-gradient(circle at 30% 30%, rgba(0,0,0,0.06), transparent 30%),
+              linear-gradient(180deg, rgba(200,160,110,0.18), rgba(120,80,40,0.06));
+  border-radius:50%;
+  transform:rotate(12deg);
+  opacity:0.9;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.08));
+}
+
+/* 註：本 CSS 以純 CSS 製作蒸氣龐克感，若要更豐富的齒輪動畫或貼圖建議加入 SVG/PNG 素材或 webfont。*/
