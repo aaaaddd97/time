@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>公司名稱 — 首頁</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 導覽列：如需修改選單項目或順序，請在此處更改 -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">公司名稱</div>
+      <nav class="main-nav" aria-label="主導覽">
+        <a href="#home">首頁</a>
+        <a href="#about">關於我們</a>
+        <a href="#org">組織架構</a>
+        <a href="#news">最新公告</a>
+        <a href="#careers">人才招募</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">聯絡我們</a>
+      </nav>
+      <button class="nav-toggle" aria-expanded="false" aria-label="切換選單">☰</button>
+    </div>
+  </header>
+
+  <!-- 主內容區塊：每個 section 都留有明確註解，方便替換文字 -->
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h1><!-- 在此替換公司口號或首頁主要標題 -->
+          你的公司口號或首頁主標題
+        </h1>
+        <p class="lead"><!-- 在此替換首頁介紹文字（短） -->
+          在此輸入首頁介紹短文。可放公司一句話描述或最新促銷 / 重點宣傳。
+        </p>
+        <!-- 行動按鈕：可連到其他頁面或表單 -->
+        <div class="hero-actions">
+          <a class="btn" href="#about">了解我們</a>
+          <a class="btn ghost" href="#careers">加入我們</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>關於我們</h2>
+        <!-- 在下方 <p> 或 <div> 中填入公司簡介全文 -->
+        <p>
+          <!-- TODO: 在此填入公司完整介紹（歷史、願景、使命等） -->
+          在此輸入公司介紹。範例：成立年份、主要業務、願景、核心價值等。
+        </p>
+      </div>
+    </section>
+
+    <section id="org" class="section">
+      <div class="container">
+        <h2>組織架構</h2>
+        <!-- 組織架構範例：使用無序列表或 SVG/圖片替換為企業專屬圖 -->
+        <ul class="org-chart">
+          <!-- 每個 li 為一個職位或部門，請自行編輯職稱與說明 -->
+          <li>
+            <strong>執行長 (CEO)</strong>
+            <p>執行長姓名 — 公司策略與願景負責人</p>
+          </li>
+          <li>
+            <strong>營運長 (COO)</strong>
+            <p>營運相關職責說明</p>
+          </li>
+          <li>
+            <strong>技術長 (CTO)</strong>
+            <p>技術與產品發展</p>
+          </li>
+          <!-- 如需更複雜的圖示，請替換此處為你準備的圖片或 SVG -->
+        </ul>
+      </div>
+    </section>
+
+    <section id="news" class="section">
+      <div class="container">
+        <h2>最新公告</h2>
+        <!-- 公告列表：可用 JavaScript 動態載入或直接在 HTML 裡編輯 -->
+        <div class="news-list">
+          <!-- 範例公告項目，請複製此區塊新增更多公告 -->
+          <article class="news-item">
+            <h3><!-- 公告標題 --> 最新公告標題範例</h3>
+            <time datetime="2026-07-04">2026-07-04</time>
+            <p>
+              <!-- 公告內容預留：在此輸入公告摘要或全文 -->
+              這裡是公告摘要範例。要顯示更長內容可以擴充或加上「閱讀更多」的連結。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="careers" class="section">
+      <div class="container">
+        <h2>人才招募</h2>
+        <!-- 招募職缺清單：請把每個職缺做為 .job-card -->
+        <div class="jobs">
+          <article class="job-card">
+            <h3><!-- 職務名稱 --> 前端工程師</h3>
+            <p class="meta">工作地點：台北 • 職務類型：全職</p>
+            <p><!-- 職務摘要（在此填寫） --> 請在此填入職務描述、需求條件、應徵方式等。</p>
+            <!-- 應徵按鈕：可改為 mailto 或表單連結 -->
+            <a class="btn small" href="mailto:hr@example.com?subject=應徵%20前端工程師">應徵此職</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>FAQ</h2>
+        <!-- FAQ 使用可展開（accordion）的結構，請在 .faq-item 中填入問題與回答 -->
+        <div class="faq">
+          <div class="faq-item">
+            <button class="faq-question">Q1：如何聯絡客服？</button>
+            <div class="faq-answer">
+              <p><!-- 回答內容 --> 您可以透過聯絡表單或直接寄信至 support@example.com 聯絡我們。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Q2：如何應徵貴公司職缺？</button>
+            <div class="faq-answer">
+              <p><!-- 回答內容 --> 請在人才招募頁面查看職缺並按「應徵此職」或寄送履歷至 hr@example.com。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>聯絡我們</h2>
+        <!-- 聯絡表單：目前為前端預覽版本，請補上後端處理或第三方表單服務 -->
+        <form id="contactForm" class="contact-form" action="#" method="post">
+          <label>
+            姓名
+            <input type="text" name="name" placeholder="請輸入姓名" required>
+          </label>
+          <label>
+            電子郵件
+            <input type="email" name="email" placeholder="your@email.com" required>
+          </label>
+          <label>
+            主旨
+            <input type="text" name="subject" placeholder="請輸入主旨">
+          </label>
+          <label>
+            內容
+            <textarea name="message" rows="6" placeholder="在此輸入訊息內容" required></textarea>
+          </label>
+          <p class="hint">※ 註：目前表單不會送出，請在後端填入處理程式或改為使用第三方服務（如 Formspree）。</p>
+          <button class="btn" type="submit">送出</button>
+        </form>
+
+        <!-- 公司基本資訊（可編輯） -->
+        <div class="company-info">
+          <h3>公司資訊</h3>
+          <p><!-- 在此填入公司地址、電話、電子郵件等 -->
+            地址：台北市範例路 100 號<br>
+            電話：02-1234-5678<br>
+            電子郵件：info@example.com
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <!-- 年份自動更新 --> <span id="year"></span> 公司名稱。版權所有。</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
