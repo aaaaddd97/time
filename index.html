@@ -9,13 +9,28 @@
 <body>
   <header class="site-header">
     <h1 class="brand">公司名稱</h1>
-    <nav class="main-nav" aria-label="主要導覽">
-      <button class="nav-btn" data-target="about" aria-controls="about" aria-pressed="true">關於我們</button>
-      <button class="nav-btn" data-target="departments" aria-controls="departments" aria-pressed="false">部門介紹</button>
+
+    <nav class="main-nav" role="navigation" aria-label="主要導覽">
+      <ul class="site-nav">
+        <li class="nav-item"><a href="#home">首頁</a></li>
+        <li class="nav-item"><a href="#about">關於我們</a></li>
+        <li class="nav-item"><a href="#structure">組織架構</a></li>
+        <li class="nav-item"><a href="#news">最新公告</a></li>
+        <li class="nav-item"><a href="#careers">人才招募</a></li>
+        <li class="nav-item"><a href="#faq">FAQ</a></li>
+        <li class="nav-item"><a href="#contact">聯絡我們</a></li>
+      </ul>
     </nav>
   </header>
 
   <main id="content" class="content" tabindex="-1">
+    <section id="home" class="panel" role="region" aria-labelledby="home-title" tabindex="0">
+      <h2 id="home-title">首頁</h2>
+      <div class="panel-body">
+        <p>（在此加入首頁重點或歡迎詞）</p>
+      </div>
+    </section>
+
     <section id="about" class="panel" role="region" aria-labelledby="about-title" tabindex="0">
       <h2 id="about-title">關於我們</h2>
       <div class="panel-body">
@@ -23,15 +38,58 @@
       </div>
     </section>
 
-    <section id="departments" class="panel hidden" role="region" aria-labelledby="dept-title" tabindex="0">
-      <h2 id="dept-title">部門介紹</h2>
+    <section id="structure" class="panel" role="region" aria-labelledby="structure-title" tabindex="0">
+      <h2 id="structure-title">組織架構</h2>
       <div class="panel-body">
-        <ul id="dept-list">
-          <li>（在此加入各部門說明或列表）</li>
-        </ul>
+        <p>（在此加入組織架構或階層圖）</p>
+      </div>
+    </section>
+
+    <section id="news" class="panel" role="region" aria-labelledby="news-title" tabindex="0">
+      <h2 id="news-title">最新公告</h2>
+      <div class="panel-body">
+        <p>（在此列出最新公告或連結到公告列表）</p>
+      </div>
+    </section>
+
+    <section id="careers" class="panel" role="region" aria-labelledby="careers-title" tabindex="0">
+      <h2 id="careers-title">人才招募</h2>
+      <div class="panel-body">
+        <p>（在此加入招募資訊與應徵方式）</p>
+      </div>
+    </section>
+
+    <section id="faq" class="panel" role="region" aria-labelledby="faq-title" tabindex="0">
+      <h2 id="faq-title">FAQ</h2>
+      <div class="panel-body">
+        <p>（常見問題）</p>
+      </div>
+    </section>
+
+    <section id="contact" class="panel" role="region" aria-labelledby="contact-title" tabindex="0">
+      <h2 id="contact-title">聯絡我們</h2>
+      <div class="panel-body">
+        <p>（聯絡資訊／表單放這裡）</p>
       </div>
     </section>
   </main>
+
+  <script>
+    // 提供平滑捲動與將焦點移到目標區塊的簡單無障礙行為
+    document.querySelectorAll('.main-nav a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var id = this.getAttribute('href').slice(1);
+        var target = document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+          target.focus({ preventScroll: true });
+          // 更新網址 hash（不產生歷史紀錄）
+          history.replaceState(null, '', '#' + id);
+        }
+      });
+    });
+  </script>
 
   <script src="app.js"></script>
 </body>
