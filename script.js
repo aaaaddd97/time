@@ -5,14 +5,122 @@
    - 頁尾年份自動更新
    - 聯絡表單前端示範處理
    - 分頁（tab-like）行為：點選選單只顯示該 section，並更新 URL hash
+   - 組織架構下拉選單與動態內容顯示
 
    註解已標示主要行為，若需更改預設顯示分頁請修改 defaultSectionId
 */
+
+// 組織架構資料
+const organizationData = {
+  director: {
+    title: '# 局長',
+    content: '在此輸入局長的職責、簡歷或相關資訊。',
+    isDepartment: false
+  },
+  council: {
+    title: '# 中央時序議會',
+    content: '在此輸入中央時序議會的職責與相關資訊。',
+    isDepartment: false
+  },
+  admin: {
+    title: '# 事務執行部',
+    divisions: [
+      { name: '內務運務科', content: '在此輸入內務運務科的職責與相關資訊。' },
+      { name: '時序干涉科', content: '在此輸入時序干涉科的職責與相關資訊。' }
+    ]
+  },
+  personnel: {
+    title: '# 人員異常處理部',
+    divisions: [
+      { name: '人員治療科', content: '在此輸入人員治療科的職責與相關資訊。' },
+      { name: '認知修復科', content: '在此輸入認知修復科的職責與相關資訊。' }
+    ]
+  },
+  info: {
+    title: '# 資訊統整部',
+    divisions: [
+      { name: '資料統計科', content: '在此輸入資料統計科的職責與相關資訊。' },
+      { name: '技術研發科', content: '在此輸入技術研發科的職責與相關資訊。' },
+      { name: '時空觀測科', content: '在此輸入時空觀測科的職責與相關資訊。' }
+    ]
+  },
+  resources: {
+    title: '# 資源保障部',
+    divisions: [
+      { name: '物資管理科', content: '在此輸入物資管理科的職責與相關資訊。' },
+      { name: '契約評量科', content: '在此輸入契約評量科的職責與相關資訊。' },
+      { name: '設施維護科', content: '在此輸入設施維護科的職責與相關資訊。' }
+    ]
+  },
+  supervision: {
+    title: '# 全局督察部',
+    divisions: [
+      { name: '人員懲戒科', content: '在此輸入人員懲戒科的職責與相關資訊。' },
+      { name: '案件糾正科', content: '在此輸入案件糾正科的職責與相關資訊。' },
+      { name: '物件處置科', content: '在此輸入物件處置科的職責與相關資訊。' },
+      { name: '緊急應變科', content: '在此輸入緊急應變科的職責與相關資訊。' }
+    ]
+  }
+};
+
+// 渲染組織架構內容
+function renderOrgContent(key) {
+  const contentDiv = document.getElementById('orgContent');
+  if (!key || !organizationData[key]) {
+    contentDiv.innerHTML = '';
+    return;
+  }
+
+  const data = organizationData[key];
+  let html = `<div class="org-detail">`;
+
+  // 標題
+  if (data.title) {
+    html += `<h3>${data.title}</h3>`;
+  }
+
+  // 如果是單純的職位（非部門）
+  if (data.content && !data.divisions) {
+    html += `
+      <div class="org-item">
+        <div class="org-input-wrapper">
+          <textarea class="org-textarea" placeholder="在此輸入相關內容">${data.content}</textarea>
+        </div>
+      </div>
+    `;
+  } 
+  // 如果是部門（包含科室）
+  else if (data.divisions) {
+    html += `<div class="org-departments">`;
+    data.divisions.forEach(division => {
+      html += `
+        <div class="org-item department-item">
+          <h4>${division.name}</h4>
+          <div class="org-input-wrapper">
+            <textarea class="org-textarea" placeholder="在此輸入 ${division.name} 的相關內容">${division.content}</textarea>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+  contentDiv.innerHTML = html;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   const navLinks = document.querySelectorAll('.main-nav a');
   const sections = document.querySelectorAll('main section');
   const defaultSectionId = 'home'; // 預設顯示的分頁 ID（如需改請修改）
+
+  // 組織架構選單事件監聽
+  const orgSelect = document.getElementById('orgSelect');
+  if (orgSelect) {
+    orgSelect.addEventListener('change', function() {
+      renderOrgContent(this.value);
+    });
+  }
 
   // 顯示指定 section，其他加上 .hidden；updateHistory 決定是否改變 URL hash
   function showSection(sectionId, updateHistory = true) {
