@@ -1,12 +1,10 @@
 /* styles.css
    公司網站範例樣式（蒸氣龐克主題版本）
    - 已保留原先的版面與結構（header、hero、section、cards、form）
-   - 新增：羊皮紙紋理背景（使用內嵌 SVG pattern）並修正聯絡區塊背景覆蓋問題
-   - 新增：組織架構下拉式選單與動態內容樣式
+   - 新增：羊皮紙紋理背景與組織架構下拉式選單樣式
 
    可修改區域說明：
    - :root 變數：主要色票（--brass、--leather、--parchment 等）
-   - 若要更換紋理可把 --parchment-pattern 的 data URL 換成其他圖檔或 data URL
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
@@ -23,25 +21,16 @@
   --metal-edge: rgba(255,255,255,0.06);
   --max-width:1100px;
   --radius:8px;
-
-  /* 內嵌羊皮紙紋理（可替換為檔案或其他 data URL）
-     小提醒：data URL 已經 URL-encoded 的 #hex 與空白 --> %23 / %20 等 */
-  --parchment-pattern: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23efe6d6'/%3E[...]
 }
 
-/* 基本重置與版面：保留原本結構用法 */
+/* 基本重置與版面 */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Helvetica Neue", Arial;
   color:var(--text-dark);
-  /* 把羊皮紙紋理放在最上層，並重複平鋪，接著是紙張漸層與微小暗角 */
-  background-image: var(--parchment-pattern),
-                    radial-gradient(circle at 10% 10%, rgba(0,0,0,0.03) 0%, transparent 20%),
-                    linear-gradient(180deg, #f5efe2 0%, #efe6d6 100%);
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-size: auto, cover, cover;
+  background: linear-gradient(180deg, #f5efe2 0%, #efe6d6 100%);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
@@ -53,7 +42,7 @@ body{
   padding:1.25rem;
 }
 
-/* Header / 導覽列：仿金屬邊與皮革背景 */
+/* Header / 導覽列 */
 .site-header{
   background: linear-gradient(180deg, var(--leather) 0%, #3a2a22 100%);
   color:var(--paper-accent);
@@ -73,7 +62,7 @@ body{
   font-weight:700;
   font-size:1.25rem;
   color:var(--brass);
-  font-family: 'Cinzel', serif; /* 裝飾字型 */
+  font-family: 'Cinzel', serif;
   text-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 -1px 0 rgba(0,0,0,0.4);
   letter-spacing:0.5px;
 }
@@ -109,9 +98,10 @@ body{
   border:0;
   font-size:1.25rem;
   color:var(--paper-accent);
+  cursor:pointer;
 }
 
-/* 英雄區（首頁）：仿金屬邊框與羊皮紙卡 */
+/* 英雄區（首頁） */
 .hero{
   padding:3.25rem 0;
   background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent 60%);
@@ -134,7 +124,6 @@ body{
 }
 .lead{ color:var(--muted); margin:0 0 1rem 0; }
 
-/* stitching decoration for hero card */
 .container.stitch{ position:relative }
 .container.stitch::before{
   content:'';
@@ -143,11 +132,10 @@ body{
   border-radius:8px;
   pointer-events:none;
   background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.04) 0 2px, transparent 2px 12px);
-  mask-image: linear-gradient(#000, #000); /* ensure it shows as subtle stitching */
   opacity:0.45;
 }
 
-/* 按鈕樣式：仿金屬銘牌 */
+/* 按鈕樣式 */
 .btn{
   display:inline-block;
   background: linear-gradient(180deg, var(--brass) 0%, var(--brass-dark) 100%);
@@ -158,6 +146,12 @@ body{
   font-weight:700;
   box-shadow: 0 4px 0 rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.18);
   border:1px solid rgba(0,0,0,0.15);
+  cursor:pointer;
+  transition: all 180ms ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 .btn.ghost{
   background:transparent;
@@ -167,9 +161,15 @@ body{
 }
 .btn.small{ padding:0.35rem 0.6rem; font-size:0.9rem; }
 
-/* 區塊統一風格：卡片改為羊皮紙與金屬邊 */
+/* 區塊統一風格 */
 .section{ padding:2rem 0; background:transparent; }
 .section + .section{ border-top:1px solid rgba(0,0,0,0.03) }
+.section h2{
+  font-family: 'Cinzel', serif;
+  color: var(--leather);
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
 
 /* 組織架構樣式 */
 .org-selector-wrapper {
@@ -252,6 +252,7 @@ body{
   font-weight: 700;
   color: var(--brass-dark);
   margin: 0.75rem 0 0.5rem 0;
+  font-family: 'Cinzel', serif;
 }
 
 .org-item {
@@ -324,10 +325,13 @@ body{
 /* 最新公告 */
 .news-list{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
 .news-item{ background: linear-gradient(180deg, var(--parchment), #f8f3e8); padding:1rem; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,0.06); border-left:4px solid #caa86b }
+.news-item h3{ margin-top: 0; margin-bottom: 0.5rem; }
 .news-item time{ color:var(--muted); font-size:0.875rem; }
 
 /* 招募卡片 */
 .job-card{ background: linear-gradient(180deg, var(--parchment), #fbf6eb); padding:1rem; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); border-top:3px dashed rgba(0,0,0,0.06) }
+.job-card h3{ margin-top: 0; }
+.meta{ color: var(--muted); font-size: 0.9rem; }
 
 /* FAQ 手風琴 */
 .faq .faq-item{ margin-bottom:0.5rem; background: linear-gradient(180deg, #fbf6eb, var(--parchment)); border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.05) }
@@ -340,14 +344,16 @@ body{
   font-weight:700;
   cursor:pointer;
   color:var(--leather);
+  transition: background 180ms ease;
+}
+.faq-question:hover{
+  background: rgba(0,0,0,0.02);
 }
 .faq-answer{ padding:0 1rem 1rem 1rem; display:none; color:var(--muted) }
 
 /* 聯絡表單 */
-/* 將整個 contact 區塊改為羊皮紙卡片，避免出現未覆蓋的白色區塊 */
 #contact{
-  background-image: var(--parchment-pattern);
-  background-repeat: repeat;
+  background: transparent;
 }
 #contact .container{
   background: linear-gradient(180deg, var(--paper-accent), var(--parchment));
@@ -362,7 +368,7 @@ body{
   gap:0.75rem;
   max-width:720px;
 }
-.contact-form label{ display:block; font-size:0.95rem }
+.contact-form label{ display:block; font-size:0.95rem; font-weight: 600; }
 .contact-form input, .contact-form textarea{
   width:100%;
   padding:0.6rem 0.75rem;
@@ -370,11 +376,18 @@ body{
   border-radius:6px;
   background: linear-gradient(180deg, #fffdf6, #fbf6eb);
   font-size:0.95rem;
+  font-family: inherit;
+  transition: all 180ms ease;
 }
-.contact-form .hint{ color:var(--muted); font-size:0.9rem }
+.contact-form input:focus, .contact-form textarea:focus{
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.1);
+}
+.contact-form .hint{ color:var(--muted); font-size:0.9rem; margin-top: 0.5rem; }
 
-/* 公司資訊也放同一張卡片內，確保背景一致 */
-.company-info{ margin-top:1rem; }
+.company-info{ margin-top:1rem; padding: 1rem; background: rgba(0,0,0,0.02); border-radius: 6px; }
+.company-info h3{ margin-top: 0; }
 
 /* Footer */
 .site-footer{
@@ -383,9 +396,10 @@ body{
   background: linear-gradient(180deg, #3a2a22, var(--leather));
   text-align:center;
   border-top:4px solid rgba(0,0,0,0.25);
+  margin-top: 2rem;
 }
 
-/* 分頁顯示控制與選單 active 樣式（保留） */
+/* 分頁顯示控制 */
 .section.hidden { display: none; }
 .main-nav a.active {
   background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.02));
@@ -394,7 +408,7 @@ body{
   font-weight:700;
 }
 
-/* gears decoration: use uploaded SVGs and add subtle rotation animation */
+/* gears decoration */
 .gears{ position:relative }
 .gears::before{
   content:'';
@@ -434,7 +448,7 @@ body{
   .nav-toggle{ display:block; }
   .header-inner{ gap:0.5rem; }
   .hero h1{ font-size:1.5rem }
-  .gears::before, .gears::after{ display:none } /* hide decorations on small screens */
+  .gears::before, .gears::after{ display:none; }
   
   .org-selector {
     font-size: 0.9rem;
@@ -449,5 +463,3 @@ body{
     padding: 0.75rem;
   }
 }
-
-/* 註：本 CSS 使用內嵌 SVG data URL 產生紙張紋理，若需更高解析度或真實貼圖可上傳圖片檔並改為 url('/path/to/parchment.png'). */
