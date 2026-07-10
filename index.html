@@ -58,22 +58,21 @@
       <div class="container">
         <h2>組織架構</h2>
         
-        <!-- 下拉式選單用於選擇部門 -->
-        <div class="org-selector-wrapper">
-          <label for="orgSelect">選擇部門/單位：</label>
-          <select id="orgSelect" class="org-selector">
-            <option value="">-- 請選擇 --</option>
-            <option value="director">局長</option>
-            <option value="council">中央時序議會</option>
-            <option value="admin">事務執行部</option>
-            <option value="personnel">人員異常處理部</option>
-            <option value="info">資訊統整部</option>
-            <option value="resources">資源保障部</option>
-            <option value="supervision">全局督察部</option>
-          </select>
+        <!-- 組織架構 hover 菜單 -->
+        <div class="org-menu-wrapper">
+          <button class="org-menu-trigger">組織結構 ▼</button>
+          <div class="org-dropdown">
+            <a href="#" class="org-item" data-org="director">局長</a>
+            <a href="#" class="org-item" data-org="council">中央時序議會</a>
+            <a href="#" class="org-item" data-org="admin">事務執行部</a>
+            <a href="#" class="org-item" data-org="personnel">人員異常處理部</a>
+            <a href="#" class="org-item" data-org="info">資訊統整部</a>
+            <a href="#" class="org-item" data-org="resources">資源保障部</a>
+            <a href="#" class="org-item" data-org="supervision">全局督察部</a>
+          </div>
         </div>
 
-        <!-- 各部門內容容器 -->
+        <!-- 組織架構內容顯示區 -->
         <div id="orgContent" class="org-content">
           <!-- 動態內容會被插入這裡 -->
         </div>
