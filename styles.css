@@ -2,6 +2,7 @@
    公司網站範例樣式（蒸氣龐克主題版本）
    - 已保留原先的版面與結構（header、hero、section、cards、form）
    - 新增：羊皮紙紋理背景（使用內嵌 SVG pattern）並修正聯絡區塊背景覆蓋問題
+   - 新增：組織架構下拉式選單與動態內容樣式
 
    可修改區域說明：
    - :root 變數：主要色票（--brass、--leather、--parchment 等）
@@ -25,7 +26,7 @@
 
   /* 內嵌羊皮紙紋理（可替換為檔案或其他 data URL）
      小提醒：data URL 已經 URL-encoded 的 #hex 與空白 --> %23 / %20 等 */
-  --parchment-pattern: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23efe6d6'/%3E%3Cg opacity='0.06' fill='%235a4b39'%3E%3Ccircle cx='18' cy='32' r='1'/%3E%3Ccircle cx='46' cy='78' r='1'/%3E%3Ccircle cx='83' cy='14' r='1'/%3E%3Ccircle cx='120' cy='54' r='1'/%3E%3Ccircle cx='160' cy='96' r='1'/%3E%3Ccircle cx='30' cy='140' r='1'/%3E%3Ccircle cx='76' cy='110' r='1'/%3E%3Ccircle cx='140' cy='152' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  --parchment-pattern: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23efe6d6'/%3E[...]
 }
 
 /* 基本重置與版面：保留原本結構用法 */
@@ -170,6 +171,138 @@ body{
 .section{ padding:2rem 0; background:transparent; }
 .section + .section{ border-top:1px solid rgba(0,0,0,0.03) }
 
+/* 組織架構樣式 */
+.org-selector-wrapper {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: linear-gradient(180deg, var(--parchment), var(--paper-accent));
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.org-selector-wrapper label {
+  display: block;
+  font-weight: 700;
+  color: var(--leather);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.org-selector {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fffdf6, #fbf6eb);
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 180ms ease;
+}
+
+.org-selector:hover {
+  background: linear-gradient(180deg, #fffef8, #fdf9f0);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.org-selector:focus {
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.1);
+}
+
+.org-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.org-detail {
+  padding: 1.5rem;
+  background: linear-gradient(180deg, var(--parchment), var(--paper-accent));
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.org-detail h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-family: 'Cinzel', serif;
+  color: var(--leather);
+  border-bottom: 2px solid var(--brass);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.org-detail h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brass-dark);
+  margin: 0.75rem 0 0.5rem 0;
+}
+
+.org-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(180deg, #fbf6eb, var(--parchment));
+  border-left: 4px solid var(--brass);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.org-item:last-child {
+  margin-bottom: 0;
+}
+
+.org-departments {
+  display: grid;
+  gap: 1rem;
+}
+
+.department-item {
+  background: linear-gradient(180deg, #fcf7ed, var(--parchment));
+  border-left: 4px solid #caa86b;
+}
+
+.org-input-wrapper {
+  margin-top: 0.5rem;
+}
+
+.org-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fffdf6, #fbf6eb);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  resize: vertical;
+  min-height: 100px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 180ms ease;
+}
+
+.org-textarea:focus {
+  outline: none;
+  border-color: var(--brass);
+  background: linear-gradient(180deg, #fffef8, #fdf9f0);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02), 0 0 0 3px rgba(176, 141, 87, 0.1);
+}
+
 .org-chart{
   list-style:none;
   padding:0;
@@ -302,6 +435,19 @@ body{
   .header-inner{ gap:0.5rem; }
   .hero h1{ font-size:1.5rem }
   .gears::before, .gears::after{ display:none } /* hide decorations on small screens */
+  
+  .org-selector {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.6rem;
+  }
+  
+  .org-detail {
+    padding: 1rem;
+  }
+  
+  .org-item {
+    padding: 0.75rem;
+  }
 }
 
 /* 註：本 CSS 使用內嵌 SVG data URL 產生紙張紋理，若需更高解析度或真實貼圖可上傳圖片檔並改為 url('/path/to/parchment.png'). */
