@@ -57,23 +57,27 @@
     <section id="org" class="section">
       <div class="container">
         <h2>組織架構</h2>
-        <!-- 組織架構範例：使用無序列表或 SVG/圖片替換為企業專屬圖 -->
-        <ul class="org-chart">
-          <!-- 每個 li 為一個職位或部門，請自行編輯職稱與說明 -->
-          <li>
-            <strong>執行長 (CEO)</strong>
-            <p>執行長姓名 — 公司策略與願景負責人</p>
-          </li>
-          <li>
-            <strong>營運長 (COO)</strong>
-            <p>營運相關職責說明</p>
-          </li>
-          <li>
-            <strong>技術長 (CTO)</strong>
-            <p>技術與產品發展</p>
-          </li>
-          <!-- 如需更複雜的圖示，請替換此處為你準備的圖片或 SVG -->
-        </ul>
+        
+        <!-- 下拉式選單用於選擇部門 -->
+        <div class="org-selector-wrapper">
+          <label for="orgSelect">選擇部門/單位：</label>
+          <select id="orgSelect" class="org-selector">
+            <option value="">-- 請選擇 --</option>
+            <option value="director">局長</option>
+            <option value="council">中央時序議會</option>
+            <option value="admin">事務執行部</option>
+            <option value="personnel">人員異常處理部</option>
+            <option value="info">資訊統整部</option>
+            <option value="resources">資源保障部</option>
+            <option value="supervision">全局督察部</option>
+          </select>
+        </div>
+
+        <!-- 各部門內容容器 -->
+        <div id="orgContent" class="org-content">
+          <!-- 動態內容會被插入這裡 -->
+        </div>
+
       </div>
     </section>
 
